@@ -13,7 +13,10 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors({
-    origin: ['http://localhost:5173', 'http://localhost:3000'],
+    origin: function (origin, callback) {
+        // Allow all origins for the Vercel deployment
+        callback(null, true);
+    },
     credentials: true,
 }));
 app.use(express.json({ limit: '10mb' }));
